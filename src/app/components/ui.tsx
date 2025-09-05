@@ -35,7 +35,11 @@ export function Select(props: React.SelectHTMLAttributes<HTMLSelectElement>) {
 
 export function Table(props: React.HTMLAttributes<HTMLTableElement>) {
 	const { className, ...rest } = props;
-	return <table className={clsx('min-w-full text-sm card', className)} {...rest} />;
+	return (
+		<div className="overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--surface)]">
+			<table className={clsx('min-w-full text-sm', className)} {...rest} />
+		</div>
+	);
 }
 
 export function Badge(props: React.HTMLAttributes<HTMLSpanElement>) {

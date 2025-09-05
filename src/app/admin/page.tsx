@@ -2,8 +2,14 @@ import Link from "next/link";
 import { agregarVenta, listarRondas, listarVentas, registrarPremioEntregado, totalesDeRonda, obtenerRondaEnCurso, setEstadoRonda, obtenerRondaPorId } from "../actions";
 import { formatCOP } from "@/lib/money";
 import { Badge, Button, Card, Input, Select, Table } from "../components/ui";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Administración - Bingo Gestión",
+  description: "Administrar rondas de bingo, ventas y premios",
+};
 
 export default async function AdminPage({ searchParams }: { searchParams?: Promise<{ rondaId?: string }> }) {
   const rondas = await listarRondas();
@@ -38,7 +44,7 @@ export default async function AdminPage({ searchParams }: { searchParams?: Promi
   }
 
   return (
-    <div>
+    <div className="min-h-screen">
       <header className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Administración</h1>
         <nav className="flex gap-3 text-sm">

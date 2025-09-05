@@ -1,15 +1,22 @@
 import { formatCOP } from "@/lib/money";
 import { RondaStats, statsPorRonda } from "../actions";
 import { Card, Table, Select, Button } from "../components/ui";
+import type { MedioPago } from "@/lib/types";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Estadísticas - Bingo Gestión",
+  description: "Estadísticas financieras y análisis de rondas de bingo",
+};
 
 export default async function StatsPage({ searchParams }: { searchParams?: Promise<{ medio?: string }> }) {
   const sp = (await searchParams) ?? {};
   const medio = sp.medio === 'EFECTIVO' || sp.medio === 'NEQUI' ? sp.medio : 'ALL';
-  const { rondas, totales } = await statsPorRonda(medio as any);
+  const { rondas, totales } = await statsPorRonda(medio as MedioPago | 'ALL');
   return (
-    <div>
+    <div className="min-h-screen">
       <header className="mb-6">
         <h1 className="text-2xl font-bold">Estadísticas</h1>
         <p className="text-gray-400">Resumen global y por ronda</p>

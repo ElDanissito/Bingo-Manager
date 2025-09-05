@@ -1,11 +1,17 @@
 import Link from "next/link";
 import { listarRondas } from "./actions";
 import { formatCOP } from "@/lib/money";
-import { Badge, Button, Card, Table } from "./components/ui";
+import { Badge, Table } from "./components/ui";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Bingo - Gestión",
+  description: "Sistema de gestión financiera para eventos de bingo locales",
+};
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen">
       <header className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Bingo Manager</h1>
         <nav className="flex gap-3 text-sm">

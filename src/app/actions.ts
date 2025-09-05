@@ -76,7 +76,22 @@ export async function setEstadoRonda(rondaId: number, estado: EstadoRonda): Prom
 	revalidatePath('/');
 	revalidatePath('/admin');
 	revalidatePath('/public');
-revalidatePath('/stats');
+	revalidatePath('/stats');
+	
+	// Notify clients about state change
+	console.log(`Notifying clients about ronda ${rondaId} state change to ${estado}`);
+	try {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const globalAny: any = global;
+		if (globalAny.broadcastUpdate) {
+			globalAny.broadcastUpdate('ronda_estado_cambiado', { rondaId, estado });
+			console.log('Broadcast sent successfully');
+		} else {
+			console.log('broadcastUpdate not available yet');
+		}
+	} catch (error) {
+		console.error('Error broadcasting update:', error);
+	}
 }
 
 export async function marcarRondaEnCurso(rondaId: number): Promise<void> {
@@ -90,7 +105,22 @@ export async function marcarRondaEnCurso(rondaId: number): Promise<void> {
 	revalidatePath('/');
 	revalidatePath('/admin');
 	revalidatePath('/public');
-revalidatePath('/stats');
+	revalidatePath('/stats');
+	
+	// Notify clients about state change
+	console.log(`Notifying clients about ronda ${rondaId} marked as en_curso`);
+	try {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		const globalAny: any = global;
+		if (globalAny.broadcastUpdate) {
+			globalAny.broadcastUpdate('ronda_estado_cambiado', { rondaId, estado: 'en_curso' });
+			console.log('Broadcast sent successfully');
+		} else {
+			console.log('broadcastUpdate not available yet');
+		}
+	} catch (error) {
+		console.error('Error broadcasting update:', error);
+	}
 }
 
 export async function agregarVenta(params: {

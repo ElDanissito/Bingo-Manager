@@ -3,8 +3,15 @@ import { formatCOP } from "@/lib/money";
 import { obtenerRondaEnCurso, obtenerRondaComenzandoReciente, acumuladoTotalRealtime, totalesDeRonda } from "../actions";
 import Image from "next/image";
 import { Card } from "../components/ui";
+import PublicPageClient from "../components/PublicPageClient";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Bingo - Información Pública",
+  description: "Información en tiempo real del bingo - Premios y acumulados",
+};
 
 export default async function PublicPage() {
   const ronda = await obtenerRondaEnCurso();
@@ -13,6 +20,7 @@ export default async function PublicPage() {
   const totales = ronda ? await totalesDeRonda(ronda.id) : null;
   return (
     <div className="fixed inset-0 overflow-hidden flex flex-col items-center justify-center text-center gap-10 bg-gradient-to-br from-violet-400/25 via-cyan-300/15 to-transparent">
+      <PublicPageClient />
       <header>
         <div className="fixed top-6 left-6">
           <Image src="/logo2.png" alt="Bingo" width={420} height={420} priority />

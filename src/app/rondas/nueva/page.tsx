@@ -2,8 +2,14 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { crearRonda } from "@/app/actions";
 import { Button, Card, Input } from "@/app/components/ui";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Crear Nueva Ronda - Bingo Gestión",
+  description: "Crear una nueva ronda de bingo con configuración personalizada",
+};
 
 export default function NuevaRondaPage() {
   async function action(formData: FormData) {
